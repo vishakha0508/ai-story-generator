@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-purple-100 min-h-screen flex items-center justify-center">
+
+  <!-- Main Container  -->
+  <div class="relative bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full before:content-[''] before:absolute before:inset-0 before:-z-10 before:bg-gradient-to-r before:from-purple-400 before:via-pink-500 before:to-purple-400 before:blur-3xl before:opacity-50">
+    
+    <!-- Robot Illustration and Speech Bubble -->
+    <div class="flex flex-col items-center space-y-6 md:flex-row md:space-y-0 md:space-x-6">
+      
+      <!-- Robot Image -->
+      <div class="relative">
+        <img src="C:\Users\visha\Desktop\ai_story_generator\robot2.png" alt="Robot Illustration" class="w-40 h-40">
+        
+        <!-- Speech Bubble -->
+        <div class="absolute top-0 -left-12 bg-white p-3 rounded-lg shadow-md text-gray-700">
+          <p class="text-sm">Welcome !</p>
+        </div>
+      </div>
+
+      <!-- Input Section -->
+      <div class="text-center md:text-left">
+        <h1 class="text-3xl font-extrabold text-gray-800">Story Generator</h1>
+        <p class="text-gray-600 mt-2 leading-relaxed">
+          Enter a prompt to generate an amazing story with the help of AI. Have fun!
+        </p>
+
+        <!-- Input Form -->
+        <form id="storyForm" class="mt-4">
+          <div class="flex items-center bg-gray-100 p-2 rounded-md shadow-inner">
+            <input type="text" id="prompt" placeholder="Type your prompt..." 
+                   class="w-full bg-transparent focus:outline-none px-4 py-2 text-gray-700">
+            <button type="submit" 
+                    class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition">
+              Generate Story
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('storyForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const prompt = document.getElementById('prompt').value;
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/generate_story', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt }),
+        });
+
+        const data = await response.json();
+        if (data.story) {
+          alert(`Story: ${data.story}`);
+        } else {
+          alert(`Error: ${data.error}`);
+        }
+      } catch (error) {
+        alert('Error connecting to server');
+      }
+    });
+  </script>
+</body>
+</html>
