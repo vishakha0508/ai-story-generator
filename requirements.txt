@@ -1,0 +1,32 @@
+Flask==2.2.3
+Flask-Cors==3.0.10
+openai==0.28.0
+requests==2.31.0
+
+
+1. Core Libraries
+Flask: To create and run your web application.
+Flask-Cors: To handle Cross-Origin Resource Sharing (CORS) for making API requests.
+OpenAI: To integrate with the OpenAI API for story generation.
+Requests (Optional): For making HTTP requests (used in some setups).
+
+2. How to Generate requirements.txt
+Activate your virtual environment:
+venv\Scripts\activate
+
+Generate the requirements.txt file using pip freeze:
+
+pip freeze > requirements.txt
+This will list all the libraries installed in your virtual environment along with their versions.
+
+Flask: Web framework for the backend.
+Flask-Cors: To handle cross-origin requests from the frontend.
+OpenAI: For integrating OpenAI's GPT-3.5 model.
+Requests: For making HTTP requests (optional if used elsewhere in your project).
+
+USE
+
+Flask: Required for running the backend API.
+Flask-Cors: Ensures that your frontend (JavaScript) can communicate with the backend (Flask).
+OpenAI: Needed to interact with the OpenAI API for generating stories.
+Requests: Useful for making API calls or fetching external data
